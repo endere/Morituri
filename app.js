@@ -35,10 +35,14 @@ function Gladiator(){
   this.school = school;
   this.item = item;
 };
-Dice.prototype.rollDice = function(){
-  var value = roll(1) - 1;
-  console.log(this.sides[value]);
-  return this.sides[value];
+Dice.prototype.rollDice = function(amount){
+  var results = [];
+  for (var i = 0; i < amount; i++){
+    var value = roll(1) - 1;
+    console.log(this.sides[value]);
+    results.push(this.sides[value]);
+  }
+  return results;
 };
 // CreateDice.prototype.roll = function
 function roll(amount){
@@ -72,5 +76,5 @@ function gatherData(amount){
 gatherData(10000);
 var sword = new Dice('sword','blank','defense','defense','attack','attack',['attack','defense']);
 var shield = new Dice('shield','blank','evasion','attack','defense','defense',['defense','defense']);
-console.log('the sword rolled ' + sword.rollDice());
-console.log('the shield rolled ' + shield.rollDice());
+console.log('the sword rolled ' + sword.rollDice(10));
+console.log('the shield rolled ' + shield.rollDice(3));
