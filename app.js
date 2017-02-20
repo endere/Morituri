@@ -75,9 +75,9 @@ Gladiator.prototype.gladRoll = function(amountOne, amountTwo){
   total.defense = one.defense + two.defense;
   total.evasion = one.evasion + two.evasion;
   total.blank = one.blank + two.blank;
-  console.log(one);
-  console.log(two);
-  console.log(total);
+  //console.log(one);
+  //console.log(two);
+  //console.log(total);
   return total;
 };
 
@@ -89,7 +89,7 @@ function compare(gladA, gladB){
   var hitsB = 0;
   var attackOverFlowB = gladB.attack - gladA.defense;
   var defenseOverFlowB = gladB.defense - gladA.evasion;
-  var evasionOverflowB = gladB.evasion - gladA.attack;
+  var evasionOverFlowB = gladB.evasion - gladA.attack;
   if (attackOverFlowA > 0){
     hitsA += attackOverFlowA;
   }
@@ -105,11 +105,13 @@ function compare(gladA, gladB){
   if (defenseOverFlowB > 0){
     hitsB += defenseOverFlowB;
   }
-  if (attackOverFlowB > 0){
-    hitsB += defenseOverFlowB;
+  if (evasionOverFlowB > 0){
+    hitsB += evasionOverFlowB;
   }
-  console.log('Gladiator A hit ' + hitsA + ' times!');
-  console.log('Gladiator B hit ' + hitsB + ' times!');
+  var numbers = [hitsA, hitsB];
+  //console.log('Gladiator A hit ' + hitsA + ' times!');
+  //console.log('Gladiator B hit ' + hitsB + ' times!');
+  return numbers;
 }
 
 function roll(amount){
@@ -147,6 +149,31 @@ var net = new Dice('Net','blank','defense','attack','evasion','evasion',['evasio
 var murmillo = new Gladiator('Murmillo',sword, shield);
 var cestus = new Gladiator('Cestus', shortBlade, fist);
 var retiarius = new Gladiator('Retiarius', spear, net);
+var hoplomachus = new Gladiator('hoplomachus',spear, shield);
+var scissor = new Gladiator('Scissor', sword, fist);
+var laquearius = new Gladiator('Laquearius', shortBlade,net);
+var trax = new Gladiator('Trax', shortBlade,shield);
+var murmilloWins = 0;
+var cestusWins = 0;
+var ties = 0;
+
+for (var n = 0; n < 100000; n++){
+  var numbers = compare(murmillo.gladRoll(1,2),murmillo.gladRoll(1,1));
+  if (numbers[0] > numbers[1]){
+    murmilloWins += 1;
+  } else if (numbers[1] > numbers[0]){
+    cestusWins += 1;
+  } else {
+    ties += 1;
+  }
+}
+console.log('The first glad won ' + murmilloWins + ' times!');
+console.log('That is ' + ((murmilloWins / 100000) * 100) + '%');
+console.log('The second won ' + cestusWins + ' times!');
+console.log('That is ' + ((cestusWins / 100000) * 100) + '%');
+console.log('There were ' + ties + ' ties!');
+console.log('That is ' + ((ties / 100000) * 100) + '%');
+
 //console.log('the sword rolled ' + sword.rollDice(1));
 //console.log('the shield rolled ' + shield.rollDice(20));
 //shield.rollDice(5);
@@ -154,8 +181,6 @@ var retiarius = new Gladiator('Retiarius', spear, net);
 // console.log(murmillo.name);
 // console.log(murmillo.diceOne.name);
 // console.log(murmillo.diceTwo.name);
-compare(murmillo.gladRoll(1000,1000), cestus.gladRoll(1000,1000));
-compare(retiarius.gladRoll(1000,1000), cestus.gladRoll(1000,1000));
 //console.log(murmillo.total);
 // var sword1 = sword.rollDice(1000);
 // var shortBlade1 = shortBlade.rollDice(1000);
