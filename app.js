@@ -35,23 +35,56 @@ function Gladiator(){
   this.school = school;
   this.item = item;
 };
-Dice.prototype.rollDice = function(amount){
+Dice.prototype.convertSides = function(amount){
   var results = [];
   for (var i = 0; i < amount; i++){
     var value = roll(1) - 1;
-    console.log(this.sides[value]);
-    results.push(this.sides[value]);
+    //console.log(value);
+    var result = this.sides[value];
+    //console.log(result);
+    if (Array.isArray(result)){
+      result.forEach(function(j) {
+        results.push(j);
+      });
+    } else {
+      results.push(result);
+    }
   }
+  //console.log(results);
   return results;
 };
-// CreateDice.prototype.roll = function
+Dice.prototype.rollDice = function(amount){
+  var count = [];
+  this.convertSides(amount).forEach(function(i) {count[i] = (count[i] || 0) + 1; });
+  //This line of code provided by Loxxy at http://stackoverflow.com/questions/19395257/how-to-count-duplicate-value-in-an-array-in-javascript
+  console.log(count);
+};
+
+function compare(gladA, gladB){
+  var hitsA = 0;
+  var attackOverFlowA = 0;
+  var defenseOverFlowA = 0;
+  var evasionOverflowA = 0;
+  var hitsB = 0;
+  var attackOverFlowB = 0;
+  var defenseOverFlowB = 0;
+  var evasionOverflowB = 0;
+  for (var i = 0; i < gladA.length; i++){
+    for (var j = 0; j < gladB.length; j++){
+      if (gladA[i] === 'attack'){
+
+      }
+    }
+  }
+}
+
 function roll(amount){
   var results = [];
   for (var i = 0; i < amount; i++){
     var number = Math.floor(Math.random() * ((6 - 1) + 1) + 1);
     results.push(number);
   }
-  console.log(results);
+  //console.log(results);
   return results;
 };
 function gatherData(amount){
@@ -73,8 +106,10 @@ function gatherData(amount){
 //for (var j = 0; j < sides.length; j ++){
 
 //}
-gatherData(10000);
+//gatherData(100000);
 var sword = new Dice('sword','blank','defense','defense','attack','attack',['attack','defense']);
 var shield = new Dice('shield','blank','evasion','attack','defense','defense',['defense','defense']);
-console.log('the sword rolled ' + sword.rollDice(10));
-console.log('the shield rolled ' + shield.rollDice(3));
+//console.log('the sword rolled ' + sword.rollDice(1));
+//console.log('the shield rolled ' + shield.rollDice(20));
+sword.rollDice(1000000);
+shield.rollDice(1000000);
