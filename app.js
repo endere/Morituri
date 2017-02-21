@@ -115,15 +115,15 @@ function compare(gladA, gladB){
   //console.log('Gladiator B hit ' + hitsB + ' times!');
   return numbers;
 }
-function fight(){
+function fight(fightAmount, gladA, diceOneA, diceTwoA,hpA,gladB,diceOneB,DiceTwoB,hpB){
   var firstWins = 0;
   var otherWins = 0;
   var ties = 0;
-  for (var n = 0; n < 100000; n++){
-    var healthA = 5;
-    var healthB = 5;
+  for (var n = 0; n < fightAmount; n++){
+    var healthA = hpA;
+    var healthB = hpB;
     while (healthA > 0 && healthB > 0){
-      var numbers = compare(murmillo.gladRoll(1,1),retiarius.gladRoll(1,1));
+      var numbers = compare(gladA.gladRoll(diceOneA,diceTwoA),gladB.gladRoll(diceOneB,DiceTwoB));
       healthA -= numbers[1];
       healthB -= numbers[0];
     }
@@ -136,11 +136,11 @@ function fight(){
     }
   }
   console.log('The first glad won ' + firstWins + ' times!');
-  console.log('That is ' + ((firstWins / 100000) * 100) + '%');
+  console.log('That is ' + ((firstWins / fightAmount) * 100) + '%');
   console.log('The second won ' + otherWins + ' times!');
-  console.log('That is ' + ((otherWins / 100000) * 100) + '%');
+  console.log('That is ' + ((otherWins / fightAmount) * 100) + '%');
   console.log('There were ' + ties + ' ties!');
-  console.log('That is ' + ((ties / 100000) * 100) + '%');
+  console.log('That is ' + ((ties / fightAmount) * 100) + '%');
 }
 function roll(amount){
   var results = [];
@@ -167,7 +167,7 @@ function gatherData(amount){
     console.log('That is ' + percentage + '% of the total!');
   }
 }
-//gatherData(100000);
+
 var sword = new Dice('Sword','blank','defense','defense','attack','attack',['attack','defense']);
 var shield = new Dice('Shield','blank','evasion','attack','defense','defense',['defense','defense']);
 var shortBlade = new Dice('ShortBlade','blank','evasion','evasion','attack','attack',['attack','evasion']);
@@ -180,36 +180,5 @@ var retiarius = new Gladiator('Retiarius', spear, net);
 var hoplomachus = new Gladiator('hoplomachus',spear, shield);
 var scissor = new Gladiator('Scissor', sword, fist);
 var laquearius = new Gladiator('Laquearius', shortBlade,net);
-var trax = new Gladiator('Trax', shortBlade,shield);
 
-// for (var n = 0; n < 100000; n++){
-//   var numbers = compare(murmillo.gladRoll(1,1),hoplomachus.gladRoll(1,1));
-//   if (numbers[0] > numbers[1]){
-//     murmilloWins += 1;
-//   } else if (numbers[1] > numbers[0]){
-//     cestusWins += 1;
-//   } else {
-//     ties += 1;
-//   }
-// }
-// console.log('The first glad won ' + murmilloWins + ' times!');
-// console.log('That is ' + ((murmilloWins / 100000) * 100) + '%');
-// console.log('The second won ' + cestusWins + ' times!');
-// console.log('That is ' + ((cestusWins / 100000) * 100) + '%');
-// console.log('There were ' + ties + ' ties!');
-// console.log('That is ' + ((ties / 100000) * 100) + '%');
-fight();
-//console.log('the sword rolled ' + sword.rollDice(1));
-//console.log('the shield rolled ' + shield.rollDice(20));
-//shield.rollDice(5);
-// console.log(murmillo);
-// console.log(murmillo.name);
-// console.log(murmillo.diceOne.name);
-// console.log(murmillo.diceTwo.name);
-//console.log(murmillo.total);
-// var sword1 = sword.rollDice(1000);
-// var shortBlade1 = shortBlade.rollDice(1000);
-// var spear1 = spear.rollDice(1000);
-// compare(sword1, shortBlade1);
-// compare(sword1, spear1);
-// compare(shortBlade1, spear1);
+fight(100000,hoplomachus,1,1,5,retiarius,1,1,5);
