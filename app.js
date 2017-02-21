@@ -7,6 +7,8 @@ function createElement(tagType, tagIdentifier, tagIdentifiername, elementContent
 //  console.log(element);
   sectionId.appendChild(element);
   //this element creation function created by Benjamin Ayzenberg.
+
+
 }
 function School(attack, defense, evasion, diceOne, diceTwo){
   this.attack = attack;
@@ -113,7 +115,33 @@ function compare(gladA, gladB){
   //console.log('Gladiator B hit ' + hitsB + ' times!');
   return numbers;
 }
-
+function fight(){
+  var firstWins = 0;
+  var otherWins = 0;
+  var ties = 0;
+  for (var n = 0; n < 100000; n++){
+    var healthA = 5;
+    var healthB = 5;
+    while (healthA > 0 && healthB > 0){
+      var numbers = compare(murmillo.gladRoll(1,1),retiarius.gladRoll(1,1));
+      healthA -= numbers[1];
+      healthB -= numbers[0];
+    }
+    if (healthA > healthB){
+      firstWins += 1;
+    } else if (healthB === healthA){
+      ties += 1;
+    } else if(healthB > healthA){
+      otherWins += 1;
+    }
+  }
+  console.log('The first glad won ' + firstWins + ' times!');
+  console.log('That is ' + ((firstWins / 100000) * 100) + '%');
+  console.log('The second won ' + otherWins + ' times!');
+  console.log('That is ' + ((otherWins / 100000) * 100) + '%');
+  console.log('There were ' + ties + ' ties!');
+  console.log('That is ' + ((ties / 100000) * 100) + '%');
+}
 function roll(amount){
   var results = [];
   for (var i = 0; i < amount; i++){
@@ -153,27 +181,24 @@ var hoplomachus = new Gladiator('hoplomachus',spear, shield);
 var scissor = new Gladiator('Scissor', sword, fist);
 var laquearius = new Gladiator('Laquearius', shortBlade,net);
 var trax = new Gladiator('Trax', shortBlade,shield);
-var murmilloWins = 0;
-var cestusWins = 0;
-var ties = 0;
 
-for (var n = 0; n < 100000; n++){
-  var numbers = compare(murmillo.gladRoll(1,2),murmillo.gladRoll(1,1));
-  if (numbers[0] > numbers[1]){
-    murmilloWins += 1;
-  } else if (numbers[1] > numbers[0]){
-    cestusWins += 1;
-  } else {
-    ties += 1;
-  }
-}
-console.log('The first glad won ' + murmilloWins + ' times!');
-console.log('That is ' + ((murmilloWins / 100000) * 100) + '%');
-console.log('The second won ' + cestusWins + ' times!');
-console.log('That is ' + ((cestusWins / 100000) * 100) + '%');
-console.log('There were ' + ties + ' ties!');
-console.log('That is ' + ((ties / 100000) * 100) + '%');
-
+// for (var n = 0; n < 100000; n++){
+//   var numbers = compare(murmillo.gladRoll(1,1),hoplomachus.gladRoll(1,1));
+//   if (numbers[0] > numbers[1]){
+//     murmilloWins += 1;
+//   } else if (numbers[1] > numbers[0]){
+//     cestusWins += 1;
+//   } else {
+//     ties += 1;
+//   }
+// }
+// console.log('The first glad won ' + murmilloWins + ' times!');
+// console.log('That is ' + ((murmilloWins / 100000) * 100) + '%');
+// console.log('The second won ' + cestusWins + ' times!');
+// console.log('That is ' + ((cestusWins / 100000) * 100) + '%');
+// console.log('There were ' + ties + ' ties!');
+// console.log('That is ' + ((ties / 100000) * 100) + '%');
+fight();
 //console.log('the sword rolled ' + sword.rollDice(1));
 //console.log('the shield rolled ' + shield.rollDice(20));
 //shield.rollDice(5);
