@@ -6,27 +6,50 @@
     <title>Morituri</title>
   </head>
   <body>
-    <h1>Hi there!</h1>
-    <p>This is the page for the basic gladiator fighting simulation program! I am currently working on a user interface, but as that is progressing, you'll have to use the console to access it for now.</p>
-    <p>Right click anywhere on the screen and hit 'inspect,' then click 'console' on the menu you find there.</p>
-    <p>Now, you'll see a carrot arrow that looks like this.</p>
-    <p>></p>
-    <p>Copy and paste this line of code into that zone, and see what happens!</p>
-    <h3>fight(100000,murmillo,1,1,5,0,retiarius,1,1,5,0);</h3>
-    <p>Now, you can futz with anything inside the perentheses all you like in order to get a ton of data about the game! Going through it piece by piece... The first number (100000) is the amount of fights simulated. I like to keep it high, to keep good statistical data, though you can mess with a single fight as well, one after another. I'm still working on putting in a console log that is useful for seeing what happens behind one fight. Don't set it too much higher than it is, or it will overload the system, since it can only do math so fast. </p>
-    <p>Then, there are two gladiator names (murmillo and retiarius, in this case). Change them to whatever you like of our gladiators, they will be, in order, the first and second gladiators mentioned in the log. The current options are:</p>
-    <ul>
-      <li>murmillo</li>
-      <li>retiarius</li>
-      <li>laquearius</li>
-      <li>hoplomachus</li>
-      <li>cestus</li>
-      <li>scissor</li>
-      <li>clubmillo (this is a murmillo with a club instead of a sword.)</li>
-      <p>The first two numbers after the Gladiator type are how many of each dice it rolls. The first number is the main hand dice (sword, shortblade, or spear), and the second is the offhand dice (shield, net, fist). the third number after the type is their health. It starts at 5, but is liable to change as well. The 4th number is their overflow. This stat governs the cap of ALL THREE overflows, with increased damage from attack, reduced from defense, and carryover symbols from evasion.</p>
-      <p>Just copy paste that code above into the log, then tweak the numbers and words however you want, and press enter to see what happens. I have barely even scratched the surface of what this tool can teach us.</p>
-      <p>Also note: the program does support changing blank sides, but I have not put that into an easily accessible form yet, so it'll take some time for me to really get that one off the ground, likely after some UI stuff changes. This thing is going to grow and change a LOT over the next few weeks, and this link is always where it will be.</p>
-      <h3>Have fun!</h3>
+    <div class="form">
+      <form id="new-gladiator-form">
+        <fieldset>
+          <legend>Enter fight info</legend>
+          <label for="amount">Amount of fights</label>
+          <input type="text" name="amount" value="100000">
+          <div id='firstglad'>
+            <label for="gladiatorA">First gladiator</label>
+            <input type="text" name="gladiatorA" value="murmillo">
+
+            <label for="diceOneA">Amount of main hand dice</label>
+            <input type="text" name="diceOneA" value="1">
+
+            <label for="diceTwoA">Amount of off hand dice</label>
+            <input type="text" name="diceTwoA" value="1">
+
+            <label for="healthA">Health</label>
+            <input type="text" name="healthA" value="5">
+
+            <label for="overflowA">Overflow</label>
+            <input type="text" name="overflowA" value="1">
+          </div>
+          <div id ='secondGlad'>
+            <label for="gladiatorB">Second gladiator</label>
+            <input type="text" name="gladiatorB" value="retiarius">
+
+            <label for="diceOneB">Amount of main hand dice</label>
+            <input type="text" name="diceOneB" value="1">
+
+            <label for="diceTwoB">Amount of off hand dice</label>
+            <input type="text" name="diceTwoB" value="1">
+
+            <label for="healthB">Health</label>
+            <input type="text" name="healthB" value="5">
+
+            <label for="overflowB">Overflow</label>
+            <input type="text" name="overflowB" value="1">
+          </div>
+          <button type="submit" name="submit">Submit</button>
+        </fieldset>
+      </form>
+    </div>
+    <table id="holder">
+    </table>
     </ul>
     <script src= "app.js" type="text/javascript"></script>
   </body>
