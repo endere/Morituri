@@ -8,7 +8,6 @@ function createElement(tagType, tagIdentifier, tagIdentifiername, elementContent
   sectionId.appendChild(element);
   //this element creation function created by Benjamin Ayzenberg.
 
-
 }
 function School(attack, defense, evasion, diceOne, diceTwo){
   this.attack = attack;
@@ -83,8 +82,12 @@ Gladiator.prototype.gladRoll = function(amountOne, amountTwo){
   return total;
 };
 
-function compare(gladA, gladB){
+function compare(gladA, gladB,carryOverA,carryOverB){
   var hitsA = 0;
+  //console.log('B has base evasion of ' + gladB.evasion + ' but ' + carryOverB + ' is about to be added!');
+  gladA.evasion += carryOverA;
+  gladB.evasion += carryOverB;
+  //console.log('Now B has evasion ' + gladB.evasion);
   var attackOverFlowA = gladA.attack - gladB.defense;
   var defenseOverFlowA = gladA.defense - gladB.evasion;
   var evasionOverFlowA = gladA.evasion - gladB.attack;
@@ -110,22 +113,61 @@ function compare(gladA, gladB){
   if (evasionOverFlowB > 0){
     hitsB += evasionOverFlowB;
   }
-  var numbers = [hitsA, hitsB];
+  var numbers = [hitsA, hitsB, attackOverFlowA, defenseOverFlowA, evasionOverFlowA, attackOverFlowB, defenseOverFlowB, evasionOverFlowB];
   //console.log('Gladiator A hit ' + hitsA + ' times!');
   //console.log('Gladiator B hit ' + hitsB + ' times!');
   return numbers;
 }
-function fight(fightAmount, gladA, diceOneA, diceTwoA,hpA,gladB,diceOneB,DiceTwoB,hpB){
+function fight(fightAmount,gladA,diceOneA,diceTwoA,hpA,overFlowA,gladB,diceOneB,DiceTwoB,hpB,overFlowB){
   var firstWins = 0;
   var otherWins = 0;
   var ties = 0;
   for (var n = 0; n < fightAmount; n++){
     var healthA = hpA;
     var healthB = hpB;
+    var carryOverA = 0;
+    var carryOverB = 0;
     while (healthA > 0 && healthB > 0){
-      var numbers = compare(gladA.gladRoll(diceOneA,diceTwoA),gladB.gladRoll(diceOneB,DiceTwoB));
-      healthA -= numbers[1];
-      healthB -= numbers[0];
+      var numbers = compare(gladA.gladRoll(diceOneA,diceTwoA),gladB.gladRoll(diceOneB,DiceTwoB),carryOverA,carryOverB);
+      carryOverA = 0;
+      carryOverB = 0;
+      //console.log('A has base damage of ' + numbers[0]);
+      //console.log('B has base damage of ' + numbers[1]);
+      for (var x = 0; x < numbers[2] && x < overFlowA; x++){
+        numbers[0] += 1;
+        //console.log('A deals one more from overflow!');
+      }
+      for (var x = 0; x < numbers[3] && x < overFlowA; x++){
+        numbers[1] -= 1;
+        //console.log('A reduces 1 damage from overflow!');
+      }
+      for (var x = 0; x < numbers[4] && x < overFlowA; x++){
+        carryOverA += 1;
+        //console.log('A carries one evasion over from overflow!');
+      }
+      for (var x = 0; x < numbers[5] && x < overFlowB; x++){
+        numbers[1] += 1;
+        //console.log('B deals one more from overflow!');
+      }
+      for (var x = 0; x < numbers[6] && x < overFlowB; x++){
+        numbers[0] -= 1;
+        //console.log('B reduces 1 damage from overflow!');
+      }
+      for (var x = 0; x < numbers[7] && x < overFlowB; x++){
+        carryOverB += 1;
+        //console.log('B carries one evasion over from overflow!');
+      }
+      if (numbers[1] > 0){
+        healthA -= numbers[1];
+      }
+      if (numbers[0] > 0){
+        healthB -= numbers[0];
+      }
+      // console.log('B does ' + numbers[1]);
+      // console.log('A does ' + numbers[0]);
+      // console.log('A: ' + healthA);
+      // console.log('B: ' + healthB);
+      // console.log('round end');
     }
     if (healthA > healthB){
       firstWins += 1;
@@ -135,6 +177,7 @@ function fight(fightAmount, gladA, diceOneA, diceTwoA,hpA,gladB,diceOneB,DiceTwo
       otherWins += 1;
     }
   }
+  console.log(fightAmount);
   console.log('The first glad won ' + firstWins + ' times!');
   console.log('That is ' + ((firstWins / fightAmount) * 100) + '%');
   console.log('The second won ' + otherWins + ' times!');
@@ -174,11 +217,13 @@ var shortBlade = new Dice('ShortBlade','blank','evasion','evasion','attack','att
 var spear = new Dice('Spear','blank','defense','defense','evasion','evasion',['evasion','defense']);
 var fist = new Dice('Fist','blank','evasion','defense','attack','attack',['attack','attack']);
 var net = new Dice('Net','blank','defense','attack','evasion','evasion',['evasion','evasion']);
+var club = new Dice('Club','blank','blank','attack','evasion','defense',['attack','evasion','defense']);
 var murmillo = new Gladiator('Murmillo',sword, shield);
 var cestus = new Gladiator('Cestus', shortBlade, fist);
 var retiarius = new Gladiator('Retiarius', spear, net);
 var hoplomachus = new Gladiator('hoplomachus',spear, shield);
 var scissor = new Gladiator('Scissor', sword, fist);
 var laquearius = new Gladiator('Laquearius', shortBlade,net);
+var clubmillo = new Gladiator('Clubmillo', club,shield);
 
-fight(100000,hoplomachus,1,1,5,retiarius,1,1,5);
+fight(100000,murmillo,1,1,5,0,laquearius,1,1,5,0);
