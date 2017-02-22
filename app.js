@@ -178,7 +178,7 @@ function fight(fightAmount,gladA,diceOneA,diceTwoA,hpA,overFlowA,gladB,diceOneB,
     }
   }
   console.log(fightAmount);
-  console.log('The first glad won ' + firstWins + ' times!');
+  console.log('The first gladiator won ' + firstWins + ' times!');
   console.log('That is ' + ((firstWins / fightAmount) * 100) + '%');
   console.log('The second won ' + otherWins + ' times!');
   console.log('That is ' + ((otherWins / fightAmount) * 100) + '%');
@@ -226,4 +226,4 @@ var scissor = new Gladiator('Scissor', sword, fist);
 var laquearius = new Gladiator('Laquearius', shortBlade,net);
 var clubmillo = new Gladiator('Clubmillo', club,shield);
 
-fight(100000,murmillo,1,1,5,0,laquearius,1,1,5,0);
+//fight(100000,murmillo,1,1,5,0,laquearius,1,1,5,0);
