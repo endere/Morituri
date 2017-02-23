@@ -1,5 +1,4 @@
 body{
-background-color: lightblue;
 }
 .form{
   max-height: 600px;
@@ -7,7 +6,7 @@ background-color: lightblue;
 }
 fieldset{
     border-radius: 25px;
-    background-color: gray;
+    background-color: lightgreen;
 }
 input{
   width: 75px;
