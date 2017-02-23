@@ -33,3 +33,15 @@ td, th{
   min-width: 100px;
   min-height: 100px;
 }
+.infoBox{
+  border: 1px solid;
+  max-width: 500px;
+  max-height: 500px;
+  width: 30%;
+  float: right;
+  border-radius: 25px;
+  background-color: skyblue;
+}
+#classes{
+  width: 15%;
+}
