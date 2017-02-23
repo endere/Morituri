@@ -11,7 +11,7 @@
         <fieldset>
           <legend>Enter fight info</legend>
           <label for="amount">Amount of fights</label>
-          <input type="text" name="amount" value="100000">
+          <input type="text" name="amount" value="10000">
           <div class="glad" id='firstglad'>
             <label for="gladiatorA">First gladiator</label>
             <input type="text" name="gladiatorA" value="murmillo">
@@ -48,8 +48,34 @@
         </fieldset>
       </form>
     </div>
+    <div class="form">
+      <form id="dataTableForm">
+        <fieldset>
+          <legend>Enter fight info</legend>
+          <label for="amount">Amount of fights</label>
+          <input type="text" name="amount" value="1000">
+          <div class="glad">
+            <label for="diceOne">Main hand dice</label>
+            <input type="text" name="diceOne" value="1">
+
+            <label for="diceTwo">Off hand dice</label>
+            <input type="text" name="diceTwo" value="1">
+
+            <label for="health">Health</label>
+            <input type="text" name="health" value="5">
+
+            <label for="overflow">Overflow</label>
+            <input type="text" name="overflow" value="1">
+          </div>
+          <button type="submit" name="submit">Graph!</button>
+        </fieldset>
+      </form>
+    </div>
     <table id="holder">
     </table>
+    <div id="holderOfTables">
+
+    </div>
     </ul>
     <script src= "app.js" type="text/javascript"></script>
   </body>

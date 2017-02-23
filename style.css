@@ -28,7 +28,8 @@ legend{
 table{
   border: 1px solid;
 }
-td{
-  max-width: 100px;
+td, th{
   border: 1px solid;
+  min-width: 100px;
+  min-height: 100px;
 }
