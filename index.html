@@ -3,10 +3,54 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-    <title></title>
+    <title>Morituri</title>
   </head>
   <body>
+    <div class="form">
+      <form id="new-gladiator-form">
+        <fieldset>
+          <legend>Enter fight info</legend>
+          <label for="amount">Amount of fights</label>
+          <input type="text" name="amount" value="100000">
+          <div id='firstglad'>
+            <label for="gladiatorA">First gladiator</label>
+            <input type="text" name="gladiatorA" value="murmillo">
 
+            <label for="diceOneA">Amount of main hand dice</label>
+            <input type="text" name="diceOneA" value="1">
+
+            <label for="diceTwoA">Amount of off hand dice</label>
+            <input type="text" name="diceTwoA" value="1">
+
+            <label for="healthA">Health</label>
+            <input type="text" name="healthA" value="5">
+
+            <label for="overflowA">Overflow</label>
+            <input type="text" name="overflowA" value="1">
+          </div>
+          <div id ='secondGlad'>
+            <label for="gladiatorB">Second gladiator</label>
+            <input type="text" name="gladiatorB" value="retiarius">
+
+            <label for="diceOneB">Amount of main hand dice</label>
+            <input type="text" name="diceOneB" value="1">
+
+            <label for="diceTwoB">Amount of off hand dice</label>
+            <input type="text" name="diceTwoB" value="1">
+
+            <label for="healthB">Health</label>
+            <input type="text" name="healthB" value="5">
+
+            <label for="overflowB">Overflow</label>
+            <input type="text" name="overflowB" value="1">
+          </div>
+          <button type="submit" name="submit">Submit</button>
+        </fieldset>
+      </form>
+    </div>
+    <table id="holder">
+    </table>
+    </ul>
     <script src= "app.js" type="text/javascript"></script>
   </body>
 </html>

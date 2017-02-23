@@ -7,6 +7,7 @@ function createElement(tagType, tagIdentifier, tagIdentifiername, elementContent
 //  console.log(element);
   sectionId.appendChild(element);
   //this element creation function created by Benjamin Ayzenberg.
+
 }
 function School(attack, defense, evasion, diceOne, diceTwo){
   this.attack = attack;
@@ -36,6 +37,8 @@ function Gladiator(name, diceOne, diceTwo){
   //this.item = item;
   this.diceOne = diceOne;
   this.diceTwo = diceTwo;
+  gladiators.push(this);
+  gladiatorNames.push(this.name);
 };
 Dice.prototype.convertSides = function(amount){
   var results = [];
@@ -81,8 +84,12 @@ Gladiator.prototype.gladRoll = function(amountOne, amountTwo){
   return total;
 };
 
-function compare(gladA, gladB){
+function compare(gladA, gladB,carryOverA,carryOverB){
   var hitsA = 0;
+  //console.log('B has base evasion of ' + gladB.evasion + ' but ' + carryOverB + ' is about to be added!');
+  gladA.evasion += carryOverA;
+  gladB.evasion += carryOverB;
+  //console.log('Now B has evasion ' + gladB.evasion);
   var attackOverFlowA = gladA.attack - gladB.defense;
   var defenseOverFlowA = gladA.defense - gladB.evasion;
   var evasionOverFlowA = gladA.evasion - gladB.attack;
@@ -108,12 +115,89 @@ function compare(gladA, gladB){
   if (evasionOverFlowB > 0){
     hitsB += evasionOverFlowB;
   }
-  var numbers = [hitsA, hitsB];
+  var numbers = [hitsA, hitsB, attackOverFlowA, defenseOverFlowA, evasionOverFlowA, attackOverFlowB, defenseOverFlowB, evasionOverFlowB];
   //console.log('Gladiator A hit ' + hitsA + ' times!');
   //console.log('Gladiator B hit ' + hitsB + ' times!');
   return numbers;
 }
-
+function fight(fightAmount,gladA,diceOneA,diceTwoA,hpA,overFlowA,gladB,diceOneB,diceTwoB,hpB,overFlowB){
+  var firstWins = 0;
+  var otherWins = 0;
+  var ties = 0;
+  for (var n = 0; n < fightAmount; n++){
+    var healthA = hpA;
+    var healthB = hpB;
+    var carryOverA = 0;
+    var carryOverB = 0;
+    while (healthA > 0 && healthB > 0){
+      var numbers = compare(gladA.gladRoll(diceOneA,diceTwoA),gladB.gladRoll(diceOneB,diceTwoB),carryOverA,carryOverB);
+      carryOverA = 0;
+      carryOverB = 0;
+      //console.log('A has base damage of ' + numbers[0]);
+      //console.log('B has base damage of ' + numbers[1]);
+      for (var x = 0; x < numbers[2] && x < overFlowA; x++){
+        numbers[0] += 1;
+        //console.log('A deals one more from overflow!');
+      }
+      for (var x = 0; x < numbers[3] && x < overFlowA; x++){
+        numbers[1] -= 1;
+        //console.log('A reduces 1 damage from overflow!');
+      }
+      for (var x = 0; x < numbers[4] && x < overFlowA; x++){
+        carryOverA += 1;
+        //console.log('A carries one evasion over from overflow!');
+      }
+      for (var x = 0; x < numbers[5] && x < overFlowB; x++){
+        numbers[1] += 1;
+        //console.log('B deals one more from overflow!');
+      }
+      for (var x = 0; x < numbers[6] && x < overFlowB; x++){
+        numbers[0] -= 1;
+        //console.log('B reduces 1 damage from overflow!');
+      }
+      for (var x = 0; x < numbers[7] && x < overFlowB; x++){
+        carryOverB += 1;
+        //console.log('B carries one evasion over from overflow!');
+      }
+      if (numbers[1] > 0){
+        healthA -= numbers[1];
+      }
+      if (numbers[0] > 0){
+        healthB -= numbers[0];
+      }
+      // console.log('B does ' + numbers[1]);
+      // console.log('A does ' + numbers[0]);
+      // console.log('A: ' + healthA);
+      // console.log('B: ' + healthB);
+      // console.log('round end');
+    }
+    if (healthA > healthB){
+      firstWins += 1;
+    } else if (healthB === healthA){
+      ties += 1;
+    } else if(healthB > healthA){
+      otherWins += 1;
+    }
+  }
+  console.log(fightAmount);
+  console.log('The first gladiator won ' + firstWins + ' times!');
+  console.log('That is ' + ((firstWins / fightAmount) * 100) + '%');
+  console.log('The second won ' + otherWins + ' times!');
+  console.log('That is ' + ((otherWins / fightAmount) * 100) + '%');
+  console.log('There were ' + ties + ' ties!');
+  console.log('That is ' + ((ties / fightAmount) * 100) + '%');
+  if (document.getElementById('tableRow')){
+    var axed = document.getElementById('tableRow');
+    axed.parentNode.removeChild(axed);
+  }
+  createElement('tr', 'id', 'tableRow', '', document.getElementById('holder'));
+  createElement('li', 'class', 'results', 'The first gladiator won ' + firstWins, document.getElementById('tableRow'));
+  createElement('li', 'class', 'results', 'That is ' + ((firstWins / fightAmount) * 100) + '%', document.getElementById('tableRow'));
+  createElement('li', 'class', 'results', 'The second gladiator won ' + otherWins, document.getElementById('tableRow'));
+  createElement('li', 'class', 'results', 'That is ' + ((otherWins / fightAmount) * 100) + '%', document.getElementById('tableRow'));
+  createElement('li', 'class', 'results', 'There were ' + ties + 'ties!', document.getElementById('tableRow'));
+  createElement('li', 'class', 'results', 'That is ' + ((ties / fightAmount) * 100) + '%', document.getElementById('tableRow'));
+}
 function roll(amount){
   var results = [];
   for (var i = 0; i < amount; i++){
@@ -139,52 +223,68 @@ function gatherData(amount){
     console.log('That is ' + percentage + '% of the total!');
   }
 }
-//gatherData(100000);
+
+var gladiators = [];
+var gladiatorNames = [];
 var sword = new Dice('Sword','blank','defense','defense','attack','attack',['attack','defense']);
 var shield = new Dice('Shield','blank','evasion','attack','defense','defense',['defense','defense']);
 var shortBlade = new Dice('ShortBlade','blank','evasion','evasion','attack','attack',['attack','evasion']);
 var spear = new Dice('Spear','blank','defense','defense','evasion','evasion',['evasion','defense']);
 var fist = new Dice('Fist','blank','evasion','defense','attack','attack',['attack','attack']);
 var net = new Dice('Net','blank','defense','attack','evasion','evasion',['evasion','evasion']);
-var murmillo = new Gladiator('Murmillo',sword, shield);
-var cestus = new Gladiator('Cestus', shortBlade, fist);
-var retiarius = new Gladiator('Retiarius', spear, net);
-var hoplomachus = new Gladiator('hoplomachus',spear, shield);
-var scissor = new Gladiator('Scissor', sword, fist);
-var laquearius = new Gladiator('Laquearius', shortBlade,net);
-var trax = new Gladiator('Trax', shortBlade,shield);
-var murmilloWins = 0;
-var cestusWins = 0;
-var ties = 0;
+var club = new Dice('Club','blank','blank','attack','evasion','defense',['attack','evasion','defense']);
+new Gladiator('murmillo', sword, shield);
+new Gladiator('cestus', shortBlade, fist);
+new Gladiator('retiarius', spear, net);
+new Gladiator('hoplomachus',spear, shield);
+new Gladiator('scissor', sword, fist);
+new Gladiator('laquearius', shortBlade,net);
+new Gladiator('clubmillo', club,shield);
+console.log(gladiators);
+console.log(gladiatorNames);
+//use above to pass the objects into other functions
+//fight(100000,murmillo,1,1,5,0,laquearius,1,1,5,0);
 
-for (var n = 0; n < 100000; n++){
-  var numbers = compare(murmillo.gladRoll(1,2),murmillo.gladRoll(1,1));
-  if (numbers[0] > numbers[1]){
-    murmilloWins += 1;
-  } else if (numbers[1] > numbers[0]){
-    cestusWins += 1;
-  } else {
-    ties += 1;
+var gladFormEl = document.getElementById('new-gladiator-form');
+gladFormEl.addEventListener('submit', handleSubmit);
+
+function handleSubmit(event){
+  event.preventDefault();
+  event.stopPropagation();
+  console.log('test');
+  console.log(event.target.amount.value);
+  console.log(event.target.gladiatorA.value);
+  console.log(event.target.diceOneA.value);
+  console.log(event.target.diceTwoA.value);
+  console.log(event.target.healthA.value);
+  console.log(event.target.overflowA.value);
+  console.log(event.target.gladiatorB.value);
+  console.log(event.target.diceOneB.value);
+  console.log(event.target.diceTwoB.value);
+  console.log(event.target.healthB.value);
+  console.log(event.target.overflowB.value);
+
+  var amount = (event.target.amount.value);
+  var gladiatorA = (event.target.gladiatorA.value);
+  var diceOneA = (event.target.diceOneA.value);
+  var diceTwoA = (event.target.diceTwoA.value);
+  var healthA = (event.target.healthA.value);
+  var overflowA = (event.target.overflowA.value);
+  var gladiatorB = (event.target.gladiatorB.value);
+  var diceOneB = (event.target.diceOneB.value);
+  var diceTwoB = (event.target.diceTwoB.value);
+  var healthB = (event.target.healthB.value);
+  var overflowB = (event.target.overflowB.value);
+  for (var i = 0; i < gladiatorNames.length; i++){
+    if (gladiatorA === gladiatorNames[i]){
+      gladiatorA = gladiators[i];
+    }
   }
+  for (var i = 0; i < gladiatorNames.length; i++){
+    if (gladiatorB === gladiatorNames[i]){
+      gladiatorB = gladiators[i];
+    }
+  }
+  console.log(gladiatorA);
+  fight(amount,gladiatorA,diceOneA,diceTwoA,healthA,overflowA,gladiatorB,diceOneB,diceTwoB,healthB,overflowB);
 }
-console.log('The first glad won ' + murmilloWins + ' times!');
-console.log('That is ' + ((murmilloWins / 100000) * 100) + '%');
-console.log('The second won ' + cestusWins + ' times!');
-console.log('That is ' + ((cestusWins / 100000) * 100) + '%');
-console.log('There were ' + ties + ' ties!');
-console.log('That is ' + ((ties / 100000) * 100) + '%');
-
-//console.log('the sword rolled ' + sword.rollDice(1));
-//console.log('the shield rolled ' + shield.rollDice(20));
-//shield.rollDice(5);
-// console.log(murmillo);
-// console.log(murmillo.name);
-// console.log(murmillo.diceOne.name);
-// console.log(murmillo.diceTwo.name);
-//console.log(murmillo.total);
-// var sword1 = sword.rollDice(1000);
-// var shortBlade1 = shortBlade.rollDice(1000);
-// var spear1 = spear.rollDice(1000);
-// compare(sword1, shortBlade1);
-// compare(sword1, spear1);
-// compare(shortBlade1, spear1);
