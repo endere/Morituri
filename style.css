@@ -1,0 +1,34 @@
+body{
+}
+.form{
+  max-height: 600px;
+  max-width: 650px;
+}
+fieldset{
+    border-radius: 25px;
+    background-color: lightgreen;
+}
+input{
+  width: 75px;
+  margin: 5px;
+}
+.glad{
+  border: 1px solid;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+legend{
+  text-align: left;
+  border-radius: 25px;
+  border: 1px solid;
+  position: relative;
+  background-color: lightgray;
+}
+table{
+  border: 1px solid;
+}
+td{
+  max-width: 100px;
+  border: 1px solid;
+}
