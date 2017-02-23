@@ -197,6 +197,7 @@ function fight(fightAmount,gladA,diceOneA,diceTwoA,hpA,overFlowA,gladB,diceOneB,
   createElement('li', 'class', 'results', 'That is ' + round(((otherWins / fightAmount) * 100), 2) + '%', document.getElementById('tableRow'));
   createElement('li', 'class', 'results', 'There were ' + ties + 'ties!', document.getElementById('tableRow'));
   createElement('li', 'class', 'results', 'That is ' + round(((ties / fightAmount) * 100), 2) + '%', document.getElementById('tableRow'));
+
 }
 function roll(amount){
   var results = [];
