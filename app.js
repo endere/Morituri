@@ -192,11 +192,11 @@ function fight(fightAmount,gladA,diceOneA,diceTwoA,hpA,overFlowA,gladB,diceOneB,
   }
   createElement('tr', 'id', 'tableRow', '', document.getElementById('holder'));
   createElement('li', 'class', 'results', 'The first gladiator won ' + firstWins, document.getElementById('tableRow'));
-  createElement('li', 'class', 'results', 'That is ' + ((firstWins / fightAmount) * 100) + '%', document.getElementById('tableRow'));
+  createElement('li', 'class', 'results', 'That is ' + round(((firstWins / fightAmount) * 100), 2) + '%', document.getElementById('tableRow'));
   createElement('li', 'class', 'results', 'The second gladiator won ' + otherWins, document.getElementById('tableRow'));
-  createElement('li', 'class', 'results', 'That is ' + ((otherWins / fightAmount) * 100) + '%', document.getElementById('tableRow'));
+  createElement('li', 'class', 'results', 'That is ' + round(((otherWins / fightAmount) * 100), 2) + '%', document.getElementById('tableRow'));
   createElement('li', 'class', 'results', 'There were ' + ties + 'ties!', document.getElementById('tableRow'));
-  createElement('li', 'class', 'results', 'That is ' + ((ties / fightAmount) * 100) + '%', document.getElementById('tableRow'));
+  createElement('li', 'class', 'results', 'That is ' + round(((ties / fightAmount) * 100), 2) + '%', document.getElementById('tableRow'));
 }
 function roll(amount){
   var results = [];
@@ -207,6 +207,11 @@ function roll(amount){
   //console.log(results);
   return results;
 };
+function round(value, decimals){
+  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+  // Rounding function found at http://www.jacklmoore.com/notes/rounding-in-javascript/
+  //by Jack Moore
+}
 function gatherData(amount){
   var sides = [1,2,3,4,5,6];
   var results = roll(amount);
