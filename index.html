@@ -6,12 +6,28 @@
     <title>Morituri</title>
   </head>
   <body>
+    <div class="infoBox">
+      <p>The upper form creates statistics for a single matchup, and will display the win, loss, and tie percentages for the pair. Input desired stats, including number of dice used, amount of health, and overflow level for both gladiators A and B.</p>
+      <p>The second form creates mass statistics for every possible matchup. The Y axis of gladiators on the left are your gladiator A. The upper box applies to them, and their win/loss/tie rate is displayed to the right. The X axis gladiators are gladiator B, their statistics are not tracked. In order to see the data from their perspective, simply invert the input stats in the form.</p>
+      <p>Please be mindful to only type in gladiator classes in lower case.</p>
+    </div>
+    <div class="infoBox" id="classes">
+      <ul>
+        Avaliable gladiators:
+        <li>murmillo</li>
+        <li>cestus</li>
+        <li>retiarius</li>
+        <li>hoplomachus</li>
+        <li>scissor</li>
+        <li>laquearius</li>
+      </ul>
+    </div>
     <div class="form">
       <form id="new-gladiator-form">
         <fieldset>
           <legend>Enter fight info</legend>
           <label for="amount">Amount of fights</label>
-          <input type="text" name="amount" value="100000">
+          <input type="text" name="amount" value="10000">
           <div class="glad" id='firstglad'>
             <label for="gladiatorA">First gladiator</label>
             <input type="text" name="gladiatorA" value="murmillo">
@@ -48,8 +64,47 @@
         </fieldset>
       </form>
     </div>
+    <div class="form">
+      <form id="dataTableForm">
+        <fieldset>
+          <legend>Enter graph info</legend>
+          <label for="amount">Amount of fights</label>
+          <input type="text" name="amount" value="1000">
+          <div class="glad">
+            <label for="diceOneA">Main hand dice</label>
+            <input type="text" name="diceOneA" value="1">
+
+            <label for="diceTwoA">Off hand dice</label>
+            <input type="text" name="diceTwoA" value="1">
+
+            <label for="healthA">Health</label>
+            <input type="text" name="healthA" value="5">
+
+            <label for="overflowA">Overflow</label>
+            <input type="text" name="overflowA" value="1">
+          </div>
+          <div class="glad">
+            <label for="diceOneB">Main hand dice</label>
+            <input type="text" name="diceOneB" value="1">
+
+            <label for="diceTwoB">Off hand dice</label>
+            <input type="text" name="diceTwoB" value="1">
+
+            <label for="healthB">Health</label>
+            <input type="text" name="healthB" value="5">
+
+            <label for="overflowB">Overflow</label>
+            <input type="text" name="overflowB" value="1">
+          </div>
+          <button type="submit" name="submit">Graph!</button>
+        </fieldset>
+      </form>
+    </div>
     <table id="holder">
     </table>
+    <div id="holderOfTables">
+
+    </div>
     </ul>
     <script src= "app.js" type="text/javascript"></script>
   </body>
