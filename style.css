@@ -45,3 +45,6 @@ td, th{
 #classes{
   width: 15%;
 }
+.header{
+  font-weight: bold;
+}
