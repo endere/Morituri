@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>templating</title>
+    <link rel="stylesheet" href="templating.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/x-handlebars-template" id="gladiator-template">
+      <div class= "gladiatorCardHolder">
+        <h2>{{name}}</h2>
+        <h3>{{class}}</h3>
+        <img class="gladImg" src="{{img}}" alt="">
+        <div class="payOuts">
+          <div class="payOutNumbers">Win: 6 <br> Lose 1 <br> {{unfavored}}</div>
+          <div class="payOutNumbers">Win: 4 <br> Lose 2 <br> {{tie}}</div>
+          <div class="payOutNumbers">Win: 2 <br> Lose 3 <br> {{favored}}</div>
+        </div>
+        <h4 class="{{weaponOne}}">{{weaponOne}}<img class="icon" src="Icons/imgres.png"></h4>
+        <h4 class="armor">Armor<img class="icon" src="Icons/armor icon.png"></h4>
+        <h4 class="{{weaponTwo}}">{{weaponTwo}}<img class="icon" src="Icons/imgres.png"></h4>
+        <p>{{effectText}}</p>
+      </div>
+</script>
+  </head>
+  <body>
+    For gladiator fight statistics, click <a href="./index.html">here</a>
+      <!-- <section id="formHolder">
+        <h1>Gladiator template</h1>
+        <form id="new-form">
+            <input type="text" id="name" placeholder="Name"  required>
+            <input type ="text" id="img" placeholder="img url"  required>
+            <input type ="text" id="class" placeholder="Class"  required>
+            <input type="text" id="weaponOne" placeholder="First Weapon" required>
+            <input type="text" id="weaponTwo" placeholder="Second Weapon" required>
+            <input type="text" id="effectText" placeholder="Effect" required>
+        </form>
+      </section> -->
+      <section id="cardHolder">
+
+      </section>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
+      <script src= "gladiatorRawData.js" type="text/javascript"></script>
+      <script src= "templating.js" type="text/javascript"></script>
+  </body>
+</html>

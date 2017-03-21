@@ -1,0 +1,99 @@
+*{
+}
+input{
+display: block;
+}
+.gladiatorCardHolder{
+  position: relative;
+  margin: 200px;
+}
+
+.gladImg{
+  width: 300px;
+  height: 432px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  border: 1px solid;
+  box-sizing: border-box;
+  margin-left: 60px;
+}
+.icon{
+  height: 50px;
+  width: 50px;
+  display: block;
+  mix-blend-mode: multiply;
+}
+h2{
+  background-image: url("Backgrounds/canstock8666135.jpg");
+  background-size: 150px 86px;
+  background-repeat: no-repeat;
+  width: 150px;
+  height: 86px;
+  text-align: center;
+  line-height: 86px;
+  margin: 0px;
+}
+h3{
+  background-image: url("Backgrounds/canstock8666135.jpg");
+  background-size: 112px 64px;
+  background-repeat: no-repeat;
+  width: 112px;
+  height: 64px;
+  text-align: center;
+  line-height: 64px;
+  margin: 0px;
+}
+h4{
+  margin-top: 0px;
+  margin-left: -2px;
+  margin-right: -2px;
+  margin-bottom: 0px;
+  height: 120px;
+  width: 120px;
+  box-sizing: border-box;
+  position: relative;
+  left: 2px;
+  border: 6px solid;
+  display: inline-block;
+  font-size: 25px;
+}
+p{
+  margin-top: 0px;
+  border: 1px solid;
+  box-sizing: border-box;
+  width: 360px;
+  font-size: 30px;
+}
+.payOuts, h4,p{
+  background-image: url("Backgrounds/7503020917158.jpg");
+  background-repeat: no-repeat;
+}
+.payOuts{
+  width: 112px;
+  font-size: 17px;
+}
+.payOutNumbers{
+  padding: 5px;
+  border: 2px solid;
+  box-sizing: border-box;
+}
+.sword{
+  border-color: purple;
+}
+.shield{
+  border-color: blue;
+}
+.net{
+  border-color: green;
+}
+.spear{
+  border-color: cyan;
+}
+.fist{
+  border-color: red;
+}
+.shortBlade{
+  border-color: yellow;
+}
