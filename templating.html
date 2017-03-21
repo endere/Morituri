@@ -8,16 +8,16 @@
     <script type="text/x-handlebars-template" id="gladiator-template">
       <div class= "gladiatorCardHolder">
         <h2>{{name}}</h2>
-        <h3>{{class}}</h3>
+        <h3>{{class}}<img class="smallIcon" src="{{classIcon}}"></h3>
         <img class="gladImg" src="{{img}}" alt="">
         <div class="payOuts">
-          <div class="payOutNumbers">Win: 6 <br> Lose 1 <br> {{unfavored}}</div>
-          <div class="payOutNumbers">Win: 4 <br> Lose 2 <br> {{tie}}</div>
-          <div class="payOutNumbers">Win: 2 <br> Lose 3 <br> {{favored}}</div>
+          <div class="payOutNumbers">Win: 6 <br> Lose 1 <br> {{unfavoredOne}}<img class="smallIcon" src="{{unfavoredOneImg}}"> <br> {{unfavoredTwo}}<img class="smallIcon" src="{{unfavoredTwoImg}}"></div>
+          <div class="payOutNumbers">Win: 4 <br> Lose 2 <br> {{tieOne}}<img class="smallIcon" src="{{tieOneImg}}"> <br> {{tieTwo}}<img class="smallIcon" src="{{tieTwoImg}}"></div>
+          <div class="payOutNumbers">Win: 2 <br> Lose 3 <br> {{favoredOne}}<img class="smallIcon" src="{{favoredOneImg}}"> <br> {{favoredTwo}}<img class="smallIcon" src="{{favoredTwoImg}}"></div>
         </div>
-        <h4 class="{{weaponOne}}">{{weaponOne}}<img class="icon" src="Icons/imgres.png"></h4>
-        <h4 class="armor">Armor<img class="icon" src="Icons/armor icon.png"></h4>
-        <h4 class="{{weaponTwo}}">{{weaponTwo}}<img class="icon" src="Icons/imgres.png"></h4>
+        <h4 class="{{weaponOne}}">{{weaponOne}}<br><img class="icon" src="Icons/imgres.png"><img class="icon" src="{{weaponOneImg}}"></h4>
+        <h4 class="armor">Armor 5<img class="icon" src="Icons/armor icon.png"></h4>
+        <h4 class="{{weaponTwo}}">{{weaponTwo}}<br><img class="icon" src="Icons/imgres.png"><img class="icon" src="{{weaponTwoImg}}"></h4>
         <p>{{effectText}}</p>
       </div>
 </script>
