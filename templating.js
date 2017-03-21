@@ -21,7 +21,7 @@ function GladiatorCard(data){
     this.payOuts = ['Retiarius', 'Laquearius', 'Hoplomachus', 'Cestus','Murmillo','Scissor','Hoplomachus'];
     break;
   default:
-    this.payOuts = ['Balance','Balance','Balance','Balance','Balance','Balance','Balance',];
+    this.payOuts = ['Balance','Balance','Balance','Balance','Balance','Balance', data.class,];
     break;
   }
   for (var i = 0; i < this.payOuts.length; i++) {
