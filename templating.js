@@ -4,24 +4,38 @@ function GladiatorCard(data){
   switch(data.class){
   case 'Murmillo':
     this.payOuts = ['Retiarius', 'Hoplomachus', 'Murmillo', 'Laquearius', 'Scissor', 'Cestus','Murmillo'];
+    this.weaponOne = 'sword';
+    this.weaponTwo = 'shield';
     break;
   case 'Retiarius':
     this.payOuts = ['Cestus', 'Laquearius', 'Retiarius', 'Scissor', 'Murmillo', 'Hoplomachus','Retiarius'];
+    this.weaponOne = 'spear';
+    this.weaponTwo = 'net';
     break;
   case 'Cestus':
     this.payOuts = ['Murmillo', 'Scissor', 'Hoplomachus', 'Cestus','Retiarius','Laquearius','Cestus'];
+    this.weaponOne = 'shortBlade';
+    this.weaponTwo = 'fist';
     break;
   case 'Laquearius':
     this.payOuts = ['Scissor', 'Cestus', 'Laquearius', 'Murmillo','Retiarius','Hoplomachus','Laquearius'];
+    this.weaponOne = 'shortBlade';
+    this.weaponTwo = 'net';
     break;
   case 'Scissor':
     this.payOuts = ['Murmillo', 'Hoplomachus', 'Retiarius', 'Scissor','Laquearius','Cestus','Scissor'];
+    this.weaponOne = 'sword';
+    this.weaponTwo = 'fist';
     break;
   case 'Hoplomachus':
     this.payOuts = ['Retiarius', 'Laquearius', 'Hoplomachus', 'Cestus','Murmillo','Scissor','Hoplomachus'];
+    this.weaponOne = 'spear';
+    this.weaponTwo = 'shield';
     break;
   default:
     this.payOuts = ['Balance','Balance','Balance','Balance','Balance','Balance', data.class,];
+    this.weaponOne = data.weaponOne;
+    this.weaponTwo = data.weaponTwo;
     break;
   }
   for (var i = 0; i < this.payOuts.length; i++) {
@@ -92,7 +106,6 @@ function GladiatorCard(data){
   this.unfavored = data.unfavored;
   this.tie = data.tie;
   this.favored = data.favored;
-  this.weaponOne = data.weaponOne;
   switch(this.weaponOne){
   case 'sword':
     this.weaponOneImg = 'Icons/sword emblem.png';
@@ -103,12 +116,29 @@ function GladiatorCard(data){
   case 'shortBlade':
     this.weaponOneImg = 'Icons/shortblade icon.png';
     break;
+  case 'shield':
+    this.weaponOneImg = 'Icons/shield icon.png';
+    break;
+  case 'net':
+    this.weaponOneImg = 'Icons/net.png';
+    break;
+  case 'fist':
+    this.weaponOneImg = 'Icons/scissor icon.png';
+    break;
   case 'club':
     this.weaponOneImg = 'Icons/Club icon.png';
     break;
   }
-  this.weaponTwo = data.weaponTwo;
   switch(this.weaponTwo){
+  case 'sword':
+    this.weaponTwoImg = 'Icons/sword emblem.png';
+    break;
+  case 'spear':
+    this.weaponTwoImg = 'Icons/spear icon.png';
+    break;
+  case 'shortBlade':
+    this.weaponTwoImg = 'Icons/shortblade icon.png';
+    break;
   case 'shield':
     this.weaponTwoImg = 'Icons/shield icon.png';
     break;
