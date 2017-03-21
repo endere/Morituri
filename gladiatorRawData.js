@@ -12,7 +12,7 @@ var rawData = [
   },
   {
     name: 'Verus',
-    img: 'Backgrounds/retiario.jpg',
+    img: 'Backgrounds/Retiario.jpg',
     payOuts: ['Cestus', 'Laquearius', 'Retiarius', 'Scissor', 'Murmillo', 'Hoplomachus','Retiarius'],
     weaponOne: 'spear',
     weaponTwo: 'net',
