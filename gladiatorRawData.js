@@ -26,4 +26,28 @@ var rawData = [
     weaponTwo: 'fist',
     effectText: 'He feeds on your tears.'
   },
+  {
+    name: 'Flamma',
+    img: 'Backgrounds/flamma.jpg',
+    payOuts: ['Murmillo', 'Hoplomachus', 'Retiarius', 'Scissor','Laquearius','Cestus','Scissor'],
+    weaponOne: 'sword',
+    weaponTwo: 'fist',
+    effectText: 'When he wins a round with 4+ health, gain +2 glory.'
+  },
+  {
+    name: 'Hoppy The ',
+    img: 'Backgrounds/hop.jpg',
+    payOuts: ['Retiarius', 'Laquearius', 'Hoplomachus', 'Cestus','Murmillo','Scissor','Hoplomachus'],
+    weaponOne: 'spear',
+    weaponTwo: 'shield',
+    effectText: '+1 overflow.'
+  },
+  {
+    name: 'Scyther, the pokemon',
+    img: 'Backgrounds/laq.jpg',
+    payOuts: ['Scissor', 'Cestus', 'Laquearius', 'Murmillo','Retiarius','Hoplomachus','Laquearius'],
+    weaponOne: 'shortBlade',
+    weaponTwo: 'net',
+    effectText: 'Gotta go fast.'
+  },
 ];
