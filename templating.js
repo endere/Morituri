@@ -4,6 +4,9 @@ function GladiatorCard(data){
   this.name = data.name;
   this.img = data.img;
   this.class = data.class;
+  this.unfavored = data.unfavored;
+  this.tie = data.tie;
+  this.favored = data.favored;
   this.weaponOne = data.weaponOne;
   this.weaponTwo = data.weaponTwo;
   this.effectText = data.effectText;
